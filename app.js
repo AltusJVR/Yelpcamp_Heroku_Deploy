@@ -23,12 +23,12 @@ const mongoose = require('mongoose');
 
 function setDb(url) {
   if (process.env.USERDOMAIN === 'ALTUSLAPTOP') {
-    console.log("Correct ENV")
+    console.log("LOCAL ENV")
     const localDB = 'mongodb://localhost/yelpcamp_deployed'
     const url = process.env.DATABASEURL || localDB;
     return url;
   } else {
-    console.log('hosted ENV');
+    console.log('PRODUCTION ENV');
     // for testing!!!!!console.log(process.env.DATABASEURL)
     return url = process.env.DATABASEURL;
   }
@@ -51,13 +51,6 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride('_method'));
 app.use(flash());
 
-// ======== Uses the currentuser data in all routes ========
-// app.use(function (req, res, next) {
-//   res.locals.currentUser = req.user;
-
-//   next();
-// });
-// seedDB();
 
 // ================================passport config==========================
 app.use(require("express-session")({
